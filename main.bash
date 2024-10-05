@@ -1,4 +1,17 @@
 #!/bin/bash
+
+echo "Installing Git..."
+sudo apt install git -y
+user=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /user | jq -r .login)
+email=$(gh api -H "Accept: application/vnd.github+json"   -H "X-GitHub-Api-Version: 2022-11-28" /user/emails | jq -r ".[1].email")
+echo "Setting $user <$email> as the default Git user..."
+git config --global user.name "$user"
+git config --global user.email "$email"
+
+echo "Installing ghq..."
+sudo apt install golang-go -y
+go install github.com/x-motemen/ghq@latest
+
 echo "Installing GitHub CLI..."
 (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
 	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
@@ -23,8 +36,6 @@ sudo ./configure
 sudo make
 sudo make install
 
-echo "Installing Git..."
-sudo apt install git-all -y
 
 echo "Installing Google Chrome..."
 wget -N https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
