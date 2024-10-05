@@ -48,6 +48,7 @@ echo "Installing flatpak..."
 sudo apt install flatpak gnome-software-plugin-flatpak -y
 
 echo "Please restart the session to enable flatpak support."
+gnome-terminal & disown
 
 echo "Installing flatpak packages..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -90,15 +91,15 @@ xfconf-query --channel xfce4-desktop --list | grep last-image | xargs xfconf-que
 echo "Dark mode..."
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Adwaita-dark'
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'vvv
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 echo "Installing diodon..."
-sudo apt install diodon -yvvvvv
+sudo apt install diodon -y
 echo "Please manually set the shortcut for diodon in "settings/keyboard/keyboard shortcut/custom shortcut".
 
 # this conflicts with cinnamon
 # echo "Installing xbindkeys..."
-# sudo apt install xbindkeys -y
+# sudo apt install xbindkeys -yv
 # xbindkeys --defaults > ~/.xbindkeysrcv
 # echo '"/usr/bin/diodon" ' >> ~/.xbindkeysrc
 # echo "  Mod4 + v" >> ~/.xbindkeysrc
@@ -106,4 +107,4 @@ echo "Please manually set the shortcut for diodon in "settings/keyboard/keyboard
 # echo "  shift+F12 " >> ~/.xbindkeysrc
 
 echo "Logging in to GitHub..."vvvvv
-gh auth login --webvvvvvvvvvvvvvvvvvvvvvvvvvv
+gh auth login --web
