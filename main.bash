@@ -86,6 +86,8 @@ sudo flatpak install flathub chat.schildi.desktop -y
 sudo flatpak install flathub com.github.debauchee.barrier -y
 sudo flatpak install flathub com.vysp3r.ProtonPlus -y
 sudo flatpak install flathub com.github.hluk.copyq -y
+sudo flatpak install flathub com.github.PintaProject.Pinta -y
+sudo flatpak install flathub org.flameshot.Flameshot -y
 
 echo "Installing VS Code..."
 # https://gitlab.com/yoshiyasu1111/install_vscode/-/blob/master/install_VSCode.sh?ref_type=heads
@@ -97,15 +99,15 @@ sudo apt update
 sudo apt install -y code
 
 # echo "Installing wine..."
-# sudo apt install wine winetricks -y
-# wget -N https://github.com/PietJankbal/Chocolatey-for-wine/releases/download/v0.5a.745/Chocolatey-for-wine.7z -O /tmp/Chocolatey-for-wine.7z
-# 7z x /tmp/Chocolatey-for-wine.7z -o/tmp/
-# wine /tmp/Chocolatey-for-wine/ChoCinstaller_0.5a.745.exe
-# winetricks -q dotnet40 gdiplus corefonts cjkfonts
+wget -N https://github.com/PietJankbal/Chocolatey-for-wine/releases/download/v0.5a.745/Chocolatey-for-wine.7z -O /tmp/Chocolatey-for-wine.7z
+7z x /tmp/Chocolatey-for-wine.7z -o/tmp/
+wine /tmp/Chocolatey-for-wine/ChoCinstaller_0.5a.745.exe
+winetricks -q dotnet40 gdiplus corefonts cjkfonts
 
 echo "Installing VM..."
 sudo apt install bridge-utils qemu-kvm virtinst libvirt-daemon virt-manager -y
 kvm-ok
+echo 'GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt vfio-pci.ids=10de:1180,10de:0e0a
 echo https://qiita.com/rxg03350/items/e76a6a858f6b9ac267b3
 virt-manager & disown
 nm-connect-editor & disown
