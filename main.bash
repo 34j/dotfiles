@@ -98,12 +98,6 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 sudo apt update
 sudo apt install -y code
 
-# echo "Installing wine..."
-wget -N https://github.com/PietJankbal/Chocolatey-for-wine/releases/download/v0.5a.745/Chocolatey-for-wine.7z -O /tmp/Chocolatey-for-wine.7z
-7z x /tmp/Chocolatey-for-wine.7z -o/tmp/
-wine /tmp/Chocolatey-for-wine/ChoCinstaller_0.5a.745.exe
-winetricks -q dotnet40 gdiplus corefonts cjkfonts
-
 echo "Installing VM..."
 sudo apt install bridge-utils qemu-kvm virtinst libvirt-daemon virt-manager -y
 kvm-ok
