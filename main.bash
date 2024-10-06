@@ -27,16 +27,36 @@ sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt update
 sudo apt install python3.11-full python3.12-full python3.13-full -y
+sudo apt install python3-pip -y
+
+echo "Installing pipx..."
+python3.11 -m pip install --user pipx
+python3.11 -m pipx ensurepath
+source ~/.bashrc
+
+echo "Installing pip packages..."
+pipx install black isort autoflake ruff pre-commit yt-dlp
+
+echo "Installing nvm..."
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/refs/heads/master/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+source ~/.bashrc
+
+echo "Installing Node.js..."
+nvm install --lts
+
+echo "Installing npm packages..."
+npm install -g hexo
 
 echo "Installing TA-Lib..."
 sudo apt install build-essential -y
-wget -N http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-tar -xzf ta-lib-0.4.0-src.tar.gz
-cd ta-lib/
+wget -N http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz -O /tmp/ta-lib-0.4.0-src.tar.gz
+tar -xzf /tmp/ta-lib-0.4.0-src.tar.gz -C /tmp/
+cd /tmp/ta-lib/
 sudo ./configure
 sudo make
 sudo make install
-
 
 echo "Installing Google Chrome..."
 wget -N https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
@@ -58,9 +78,7 @@ sudo snap install --beta lutris
 
 echo "Installing flatpak..."
 sudo apt install flatpak gnome-software-plugin-flatpak -y
-
-echo "Please restart the session to enable flatpak support."
-gnome-terminal & disown
+source /etc/profile
 
 echo "Installing flatpak packages..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -84,6 +102,13 @@ sudo apt install -y code
 # 7z x /tmp/Chocolatey-for-wine.7z -o/tmp/
 # wine /tmp/Chocolatey-for-wine/ChoCinstaller_0.5a.745.exe
 # winetricks -q dotnet40 gdiplus corefonts cjkfonts
+
+echo "Installing VM..."
+sudo apt install bridge-utils qemu-kvm virtinst libvirt-daemon virt-manager -y
+kvm-ok
+echo https://qiita.com/rxg03350/items/e76a6a858f6b9ac267b3
+virt-manager & disown
+nm-connect-editor & disown
 
 echo "Installing proton pass..."
 wget -N https://proton.me/download/PassDesktop/linux/x64/ProtonPass.deb -O /tmp/ProtonPass.deb
