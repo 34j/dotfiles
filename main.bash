@@ -132,7 +132,7 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 echo "Installing diodon..."
 sudo apt install diodon -y
-echo "Please manually set the shortcut for diodon in "settings/keyboard/keyboard shortcut/custom shortcut".
+echo "Please manually set the shortcut for diodon in "settings/keyboard/keyboard shortcut/custom shortcut"."
 
 # this conflicts with cinnamon
 # echo "Installing xbindkeys..."
